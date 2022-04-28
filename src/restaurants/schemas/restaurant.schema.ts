@@ -1,36 +1,51 @@
-import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
+@Schema()
+export class Location {
+  @Prop({ type: String, enum: ['Point'] })
+  type: string;
+
+  @Prop({ index: '2dsphere' })
+  coordinates: Number[];
+
+  formattedAddress: string;
+  city: string;
+  state: string;
+  zipcode: string;
+  country: string;
+}
 
 export enum Category {
   FAST_FOOD = 'Fast Food',
   CAFE = 'Cafe',
-  FINE_DINNING = 'Fine Dinning'
+  FINE_DINNING = 'Fine Dinning',
 }
 
 @Schema()
 export class Restaurant {
+  @Prop()
+  name: string;
 
   @Prop()
-  name: string
+  description: string;
 
   @Prop()
-  description: string
+  email: string;
 
   @Prop()
-  email: string
+  phoneNo: number;
 
   @Prop()
-  phoneNo: number
+  address: string;
 
   @Prop()
-  address: string
+  category: Category;
 
   @Prop()
-  category: Category
-  
-  @Prop()
-  image?: object[]
-  
+  image?: object[];
+
+  @Prop({ type: Object, ref: 'Location' })
+  location?: Location;
 }
 
-export const RestaurantSchema = SchemaFactory.createForClass(Restaurant)
+export const RestaurantSchema = SchemaFactory.createForClass(Restaurant);
