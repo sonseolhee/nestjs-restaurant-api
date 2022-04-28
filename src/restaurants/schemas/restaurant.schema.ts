@@ -42,7 +42,7 @@ export class Restaurant {
   category: Category;
 
   @Prop()
-  image?: object[];
+  images?: object[];
 
   @Prop({ type: Object, ref: 'Location' })
   location?: Location;
