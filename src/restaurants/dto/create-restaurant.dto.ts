@@ -1,10 +1,12 @@
 import {
   IsEmail,
+  IsEmpty,
   IsEnum,
   IsNotEmpty,
   IsPhoneNumber,
   IsString,
 } from 'class-validator';
+import { User } from '../../auth/schemas/user.schema';
 import { Category } from '../schemas/restaurant.schema';
 
 export class CreateRestaurantDto {
@@ -31,4 +33,7 @@ export class CreateRestaurantDto {
   @IsEnum(Category, { message: 'Please enter correct category' })
   @IsNotEmpty()
   readonly category: Category;
+
+  @IsEmpty({ message: 'You cannot provide the User ID' })
+  readonly user: User;
 }
