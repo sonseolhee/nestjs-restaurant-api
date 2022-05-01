@@ -76,7 +76,7 @@ export class RestaurantsController {
     const restaurant = await this.restaurantsService.findById(id);
 
     if (restaurant.user._id.toString() !== user._id.toString())
-      throw new ForbiddenException('You can not update this restaurant');
+      throw new ForbiddenException('You can not delete this restaurant');
 
     const isDeleted = await this.restaurantsService.deleteImages(
       restaurant.images,
