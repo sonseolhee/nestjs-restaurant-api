@@ -20,7 +20,7 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async create(signupDto: SignUpDto): Promise<User> {
+  async signUp(signupDto: SignUpDto): Promise<User> {
     const { password, ...rest } = signupDto;
     const hashedPassword = await bcrypt.hash(password, 10);
 

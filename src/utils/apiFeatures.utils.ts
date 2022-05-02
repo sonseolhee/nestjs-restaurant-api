@@ -84,6 +84,7 @@ export default class APIFeatures {
 
     new Promise((resolve, reject) => {
       s3.deleteObjects(params, function (err, data) {
+        console.log(data);
         if (err) {
           console.log(err);
           reject(false);
