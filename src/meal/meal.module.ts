@@ -3,8 +3,8 @@ import { MealService } from './meal.service';
 import { MealController } from './meal.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Meal, MealSchema } from './schema/meal.schema';
-import { AuthModule } from 'src/auth/auth.module';
-import { RestaurantsModule } from 'src/restaurants/restaurants.module';
+import { AuthModule } from '../auth/auth.module';
+import { RestaurantsModule } from '../restaurants/restaurants.module';
 
 @Module({
   imports: [

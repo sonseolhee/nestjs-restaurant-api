@@ -45,7 +45,6 @@ export class RestaurantsService {
     const location = await APIFeatures.getRestaurantLocation(
       restaurant.address,
     );
-    // console.log(location);
 
     const data = Object.assign(restaurant, { user, location }); //restaurant === data
     return await this.restaurantModel.create(data);
