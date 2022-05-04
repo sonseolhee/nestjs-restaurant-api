@@ -61,7 +61,8 @@ export class RestaurantsController {
   ): Promise<Restaurant> {
     const res = await this.restaurantsService.findById(id);
 
-    if (res.user._id.toString() !== user._id.toString())
+    //res.user._id.toString() !== user._id.toString() -> consist user as object
+    if (res.user.toString() !== user._id.toString())
       throw new ForbiddenException('You can not update this restaurant');
 
     return this.restaurantsService.updateById(id, restaurant);
@@ -74,15 +75,16 @@ export class RestaurantsController {
     @CurrentUser() user: User,
   ): Promise<{ deleted: Boolean }> {
     const restaurant = await this.restaurantsService.findById(id);
-
-    if (restaurant.user._id.toString() !== user._id.toString())
+    //restaurant.user._id.toString() !== user._id.toString()
+    if (restaurant.user.toString() !== user._id.toString())
       throw new ForbiddenException('You can not delete this restaurant');
 
     const isDeleted = await this.restaurantsService.deleteImages(
       restaurant.images,
     );
+
     if (isDeleted) {
-      await this.restaurantsService.deleteById(id);
+      const a = await this.restaurantsService.deleteById(id);
       return {
         deleted: true,
       };
@@ -100,7 +102,8 @@ export class RestaurantsController {
     @Param('id') id: string,
     @UploadedFiles() files: Array<Express.Multer.File>,
   ) {
-    await this.restaurantsService.findById(id);
+    const a = await this.restaurantsService.findById(id);
+    console.log(a);
     return await this.restaurantsService.uploadImages(id, files);
   }
 
